@@ -7,6 +7,6 @@
     Dashboard
 @endsection
 <div>
-    You're Login Admin
+    You're Login User
 </div>
 @endsection

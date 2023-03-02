@@ -19,21 +19,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tes', function(){
-    return view('tes');
-});
+// USER DASHBOARD
+Route::get('/dashboard', function () {
+    return view('dashboard.user');
+})->middleware(['auth', 'user'])->name('user');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+// ADMIN DASHBOARD
+Route::get('/admindash', function () {
+    return view('dashboard.admin');
+})->middleware(['auth', 'admin'])->name('admindash');
 
 Route::prefix('user')->middleware(['auth','user'])->group(function(){
-    Route::get('/dashboard', function () {return view('tes');});
+     Route::get('/dashboard', function () {return view('tes');});
 });
 
 Route::prefix('admin')->middleware(['auth','admin'])->group(function(){
-    Route::resource('pengguna', PenggunaController::class);
-    Route::get('/admin', function () {return view('tes');});
+     Route::resource('pengguna', PenggunaController::class);
+     Route::get('/dashboard', function () {return view('tes');});
 });
 
 

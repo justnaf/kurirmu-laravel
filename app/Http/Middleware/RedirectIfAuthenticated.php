@@ -4,9 +4,9 @@ namespace App\Http\Middleware;
 
 use App\Providers\RouteServiceProvider;
 use Closure;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
 class RedirectIfAuthenticated
@@ -22,20 +22,20 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                /** @var User $user */
                 $user = Auth::guard($guard);
-            
-            
-            //To Admin Dash
-            if ($user->hasRole('admin')) {
-                return redirect(route());
-            }
 
-            //To User Dash
-            else if($user->hasRole('user')){
-                return redirect(route('user'));
+                // to admin dashboard
+                if($user->hasRole('admin')) {
+                    return redirect(route('admindash'));
+                }
+
+                // to user dashboard
+                else if($user->hasRole('user')) {
+                    return redirect(route('user'));
+                }
             }
         }
-    }
 
         return $next($request);
     }
