@@ -31,7 +31,7 @@
                     href="{{ route('pengguna.index') }}"><i class="bi bi-people-fill"></i> Data
                     Petugas</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3"
-                    href="#!"><i class="bi bi-card-list"></i> Data Masuk</a>
+                    href="{{ route('data.index') }}"><i class="bi bi-card-list"></i> Data Masuk</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3"
                     href="#!"><i class="bi bi-card-checklist"></i> Entry Data</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3"
