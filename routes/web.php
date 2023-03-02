@@ -22,11 +22,20 @@ Route::get('/', function () {
 Route::get('/tes', function(){
     return view('tes');
 });
-Route::resource('pengguna', PenggunaController::class);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::prefix('user')->middleware(['auth','user'])->group(function(){
+    Route::get('/dashboard', function () {return view('tes');});
+});
+
+Route::prefix('admin')->middleware(['auth','admin'])->group(function(){
+    Route::resource('pengguna', PenggunaController::class);
+    Route::get('/admin', function () {return view('tes');});
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

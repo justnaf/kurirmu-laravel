@@ -27,12 +27,12 @@ class RedirectIfAuthenticated
             
             //To Admin Dash
             if ($user->hasRole('admin')) {
-                return redirect(route(admin));
+                return redirect(route());
             }
 
             //To User Dash
             else if($user->hasRole('user')){
-                return redirect(route('dashboard'));
+                return redirect(route('user'));
             }
         }
     }
