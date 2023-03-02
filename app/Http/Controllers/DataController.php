@@ -33,7 +33,23 @@ class DataController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+        $data = new Data();
+        $data->nopol = $request->nopol;
+        $data->owner = $request->owner;
+        $data->alamat = $request->alamat;
+        $data->desa = $request->desa;
+        $data->kecamatan = $request->kecamatan;
+        $data->model = $request->model;
+        //dd($hewan->nama_hewan);
+        $saveData = $data->save();
+
+        //dd($saveHewan);
+        if ($saveData == true) {
+            return redirect()->route('data.index')->with('success', 'Data Petugas berhasil ditambah!');
+        }else{
+            return redirect()->route('data.index')->with('validationErrors', 'Coba Dicek Lagi Cuy');
+        }
     }
 
     /**

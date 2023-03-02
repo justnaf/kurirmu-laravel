@@ -7,14 +7,13 @@
     {{ __('Data Masuk') }}
 @endsection
 <div class="mb-3">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-success" data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop">
+    <!-- Button trigger modal Tambah-->
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tambahdata">
         Tambah Data
     </button>
 
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+    <!-- Modal Tambah -->
+    <div class="modal fade" id="tambahdata" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -23,7 +22,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
-                <form action="{{ route('pengguna.store') }}" method="POST">
+                <form action="{{ route('data.store') }}" method="POST">
                     <div class="modal-body">
                         @csrf
                         <div class="mb-3">
@@ -44,12 +43,18 @@
                         <div class="mb-3">
                             <label for="InputDesa" class="form-label">Desa</label>
                             <input type="text" class="form-control" id="InputDesa"
-                                name="Desa">
+                                name="desa">
                         </div>
                         <div class="mb-3">
                             <label for="InputKec" class="form-label">Kecamatan</label>
                             <input type="text" class="form-control" id="InputKec"
                                 name="kecamatan">
+                        </div>
+                        <div class="mb-3">
+                            <label for="InputMod" class="form-label">Model</label>
+                            <input type="text" class="form-control" id="InputMod" name="model"
+                                aria-describedby="ModHelp">
+                            <div id="ModHelp" class="form-text">Contoh : Rubicon Anti Pajak</div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -67,8 +72,9 @@
     <thead>
         <tr>
             <th width="10px">No.</th>
-            <th>NoPol</th>
+            <th>Nomor Polisi</th>
             <th>Nama Pemilik</th>
+            <th>Model</th>
             <th>Alamat</th>
             <th>Desa</th>
             <th>Kecamatan</th>
@@ -82,6 +88,7 @@
                     <td>{{ $key + 1 }}</td>
                     <td>{{ $datas->nopol }}</td>
                     <td>{{ $datas->owner }}</td>
+                    <td>{{ $datas->model }}</td>
                     <td>{{ $datas->alamat }}</td>
                     <td>{{ $datas->desa }}</td>
                     <td>{{ $datas->kecamatan }}</td>

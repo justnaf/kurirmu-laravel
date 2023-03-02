@@ -9,5 +9,5 @@ class Data extends Model
 {
     protected $table = 'data';
     protected $primarykey = "id";
-    protected $fillable = [ 'nopol','owner','alamat','desa','kecamatan'];
+    protected $fillable = [ 'nopol','owner','alamat','desa','kecamatan','model'];
 }
