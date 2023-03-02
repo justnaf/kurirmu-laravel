@@ -9,7 +9,7 @@
 
 ## About This Laravel Project
 
-This Laravel Project Made For KurirMu or (https://jasaperkasagemilang.com). We made this for love
+This Laravel Project Made For KurirMu or [Jasa Perkasa Gemilang](https://jasaperkasagemilang.com). We made this for love
 
 ## How To Use
 1. First step Clonning Git
