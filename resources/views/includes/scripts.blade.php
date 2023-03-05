@@ -24,3 +24,6 @@
 <script src="{{ asset('plugin/datatable/extension/jszip/jszip.min.js') }}" defer></script>
 <script src="{{ asset('plugin/datatable/extension/pdfmake/pdfmake.min.js') }}" defer></script>
 <script src="{{ asset('plugin/datatable/extension/pdfmake/vfs_fonts.js') }}" defer></script>
+
+<!-- Select2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

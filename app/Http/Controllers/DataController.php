@@ -14,6 +14,8 @@ class DataController extends Controller
     {
        $data = Data::get();
 
+       //dd($data);
+
        $this->data['data'] = $data;
 
        return view('datamasuk.index', $this->data);
@@ -55,7 +57,7 @@ class DataController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(c $c)
+    public function show(Data $c)
     {
         //
     }
@@ -63,7 +65,7 @@ class DataController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(c $c)
+    public function edit(Data $c)
     {
         //
     }
@@ -71,7 +73,7 @@ class DataController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, c $c)
+    public function update(Request $request, Data $c)
     {
         //
     }
@@ -79,8 +81,18 @@ class DataController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(c $c)
+    public function destroy(string $id)
     {
-        //
+        // dd(Data);
+        $data = Data::find($id);
+        $deleteData = $data->delete();
+        //dd($deleteData);
+
+
+        if ($deleteData == true) {
+            return redirect()->route('data.index')->with('success', 'Data kendaraan berhasil dihapus');
+        } else {
+            return redirect()->route('data.index')->with('ValidationErrors','Data Gak Bisa Diapain');
+        }
     }
 }

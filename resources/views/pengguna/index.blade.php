@@ -83,7 +83,7 @@
                     <td>{{ $user->role }}</td>
                     <td>
                         <form id="delete-user-{{ $user->id }}"
-                            action="/pengguna/{{ $user->id }}" method="POST"
+                            action="/admin/pengguna/{{ $user->id }}" method="POST"
                             style="display: inline;">
                             @method('DELETE')
                             @csrf

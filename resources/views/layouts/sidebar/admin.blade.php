@@ -26,14 +26,15 @@
             </div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3"
-                    href="#!"><i class="bi bi-cpu-fill"></i> Dashboard</a>
+                    href="/dashboard"><i class="bi bi-cpu-fill"></i> Dashboard</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3"
                     href="{{ route('pengguna.index') }}"><i class="bi bi-people-fill"></i> Data
                     Petugas</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3"
                     href="{{ route('data.index') }}"><i class="bi bi-card-list"></i> Data Masuk</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3"
-                    href="#!"><i class="bi bi-card-checklist"></i> Entry Data</a>
+                    href="{{ route('entry.index') }}"><i class="bi bi-card-checklist"></i> Entry
+                    Data</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3"
                     href="{{ route('profile.edit') }}"><i class="bi bi-person-badge"></i>
                     Profile</a>

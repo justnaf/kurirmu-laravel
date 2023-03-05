@@ -9,7 +9,7 @@
 <div class="mb-3">
     <!-- Button trigger modal Tambah-->
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tambahdata">
-        Tambah Data
+        Entry Data
     </button>
 
     <!-- Modal Tambah -->
@@ -22,39 +22,42 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
-                <form action="{{ route('data.store') }}" method="POST">
+                <form action="{{ route('entry.store') }}" method="POST">
                     <div class="modal-body">
                         @csrf
                         <div class="mb-3">
                             <label for="InputNopol" class="form-label">Nomor Polisi</label>
-                            <input type="text" class="form-control" id="InputNopol"
-                                name="nopol" aria-describedby="nopolHelp">
-                            <div id="nopolHelp" class="form-text">Contoh : AA 34343 ES</div>
+                            <select class="form-select js-states js-example-basic-single"
+                                style="width: 100%" name="data_id">
+                                @foreach ($nopol as $datpol)
+                                    <option value="{{ $datpol->id }}">{{ $datpol->nopol }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <div id="nopolHelp" class="form-text">Pilih Nomor Polisi Yang Tertera
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="InputName" class="form-label">Nama Pemilik</label>
-                            <input type="text" class="form-control" id="InputName"
-                                name="owner">
+                            <label for="InputNop" class="form-label">Nomor Telpon</label>
+                            <input type="text" class="form-control" id="InputNop"
+                                name="no_telp">
                         </div>
                         <div class="mb-3">
-                            <label for="Alamat" class="form-label">Alamat</label>
-                            <textarea class="form-control" id="Alamat" rows="3" name="alamat"></textarea>
+                            <label for="Status" class="form-label">Status</label>
+                            <select class="form-select" aria-label="Default select example"
+                                id="Status" name="status">
+                                <option value="Dimiliki">Dimiliki</option>
+                                <option value="Dijual">Dijual</option>
+                                <option value="Rusak">Rusak</option>
+                                <option value="Hilang">Hilang</option>
+                                <option value="Meninggal">Meninggal</option>
+                                <option value="Pailit">Pailit</option>
+                                <option value="Tidak Diketahui">Tidak Diketahui</option>
+                            </select>
                         </div>
                         <div class="mb-3">
-                            <label for="InputDesa" class="form-label">Desa</label>
-                            <input type="text" class="form-control" id="InputDesa"
-                                name="desa">
-                        </div>
-                        <div class="mb-3">
-                            <label for="InputKec" class="form-label">Kecamatan</label>
-                            <input type="text" class="form-control" id="InputKec"
-                                name="kecamatan">
-                        </div>
-                        <div class="mb-3">
-                            <label for="InputMod" class="form-label">Model</label>
-                            <input type="text" class="form-control" id="InputMod" name="model"
-                                aria-describedby="ModHelp">
-                            <div id="ModHelp" class="form-text">Contoh : Rubicon Anti Pajak</div>
+                            <label for="InputNotes" class="form-label">Catatan</label>
+                            <textarea class="form-control" id="InputNotes" rows="3" name="notes"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -74,27 +77,25 @@
             <th width="10px">No.</th>
             <th>Nomor Polisi</th>
             <th>Nama Pemilik</th>
-            <th>Model</th>
-            <th>Alamat</th>
-            <th>Desa</th>
-            <th>Kecamatan</th>
+            <th>No. Telpon</th>
+            <th>Status</th>
+            <th>Catatan</th>
             <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
-        @if (count($data))
-            @foreach ($data as $key => $datas)
+        @if (count($entry))
+            @foreach ($entry as $key => $datas)
                 <tr>
                     <td>{{ $key + 1 }}</td>
-                    <td>{{ $datas->nopol }}</td>
-                    <td>{{ $datas->owner }}</td>
-                    <td>{{ $datas->model }}</td>
-                    <td>{{ $datas->alamat }}</td>
-                    <td>{{ $datas->desa }}</td>
-                    <td>{{ $datas->kecamatan }}</td>
+                    <td>{{ $datas->data->nopol }}</td>
+                    <td>{{ $datas->data->owner }}</td>
+                    <td>{{ $datas->no_telp }}</td>
+                    <td>{{ $datas->status }}</td>
+                    <td>{{ $datas->notes }}</td>
                     <td>
-                        <form id="delete-data-{{ $datas->id }}"
-                            action="/admin/data/{{ $datas->id }}" method="POST"
+                        <form id="delete-entry-{{ $datas->id }}"
+                            action="/admin/entry{{ $datas->id }}" method="POST"
                             style="display: inline;">
                             @method('DELETE')
                             @csrf
@@ -123,6 +124,17 @@
 
             table.buttons().container()
                 .appendTo('#example_wrapper .col-md-6:eq(0)');
+
+        });
+    </script>
+
+    <script defer>
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2({
+                placeholder: 'Pilih Plat Nomor',
+                dropdownParent: '#tambahdata'
+            });
         });
     </script>
 @endpush
