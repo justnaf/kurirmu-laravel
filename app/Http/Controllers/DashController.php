@@ -16,9 +16,29 @@ class DashController extends Controller
     {
         $entry = Entry::get();
         $data = Data::get();
-        $petugas = User::where('role','=','user')->get();
 
-        // dd($entry);
+        /** Status Dashboard */
+        $jumlahRusak = Entry::where('status', '=','Rusak')->count();
+        $jumlahDimiliki = Entry::where('status', '=','Dimiliki')->count();
+        $jumlahDijual = Entry::where('status', '=','Dijual')->count();
+        $jumlahHilang = Entry::where('status', '=','Hilang')->count();
+        $jumlahMeninggal = Entry::where('status', '=','Meninggal')->count();
+        $jumlahPailit = Entry::where('status', '=','Pailit')->count();
+        $jumlahIDK = Entry::where('status', '=','Tidak Diketahui')->count();
+        $this->data['jumlahRusak'] = $jumlahRusak;
+        $this->data['jumlahDimiliki'] = $jumlahDimiliki;
+        $this->data['jumlahDijual'] = $jumlahDijual;
+        $this->data['jumlahHilang'] = $jumlahHilang;
+        $this->data['jumlahMeninggal'] = $jumlahMeninggal;
+        $this->data['jumlahPailit'] = $jumlahPailit;
+        $this->data['jumlahIDK'] = $jumlahIDK;
+        /**End Status Dashboard */
+
+        /** User Dash */
+        $petugas = User::where('role','=','user')->get();
+        /** End User Dash */
+
+        // dd($jumlahRusak);
 
         $this->data['entry'] = $entry;
         $this->data['data'] = $data;
