@@ -13,6 +13,6 @@ class Data extends Model
 
     public function entry()
     {
-        return $this->hasMany(Entry::class);
+        return $this->hasOne(Entry::class);
     }
 }
