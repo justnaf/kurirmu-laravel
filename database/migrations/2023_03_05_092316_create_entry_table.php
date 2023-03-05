@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('entry', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('users_id');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('data_id');
             $table->foreign('data_id')->references('id')->on('data')->onDelete('cascade');
             $table->text('no_telp');

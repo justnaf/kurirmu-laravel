@@ -50,4 +50,8 @@ class User extends Authenticatable
     {
         return $this->getAttribute('role') === $role;
     }
+    public function entry()
+    {
+        return $this->hasMany(Entry::class);
+    }
 }

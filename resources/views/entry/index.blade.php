@@ -75,6 +75,7 @@
     <thead>
         <tr>
             <th width="10px">No.</th>
+            <th>Petugas</th>
             <th>Nomor Polisi</th>
             <th>Nama Pemilik</th>
             <th>No. Telpon</th>
@@ -88,6 +89,7 @@
             @foreach ($entry as $key => $datas)
                 <tr>
                     <td>{{ $key + 1 }}</td>
+                    <td>{{ $datas->users->name }}</td>
                     <td>{{ $datas->data->nopol }}</td>
                     <td>{{ $datas->data->owner }}</td>
                     <td>{{ $datas->no_telp }}</td>
@@ -95,7 +97,7 @@
                     <td>{{ $datas->notes }}</td>
                     <td>
                         <form id="delete-entry-{{ $datas->id }}"
-                            action="/admin/entry{{ $datas->id }}" method="POST"
+                            action="/admin/entry/{{ $datas->id }}" method="POST"
                             style="display: inline;">
                             @method('DELETE')
                             @csrf

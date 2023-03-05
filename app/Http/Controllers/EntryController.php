@@ -13,8 +13,9 @@ class EntryController extends Controller
      */
     public function index()
     {
-        $data = Entry::with('data')->get();
+        $data = Entry::with('data','users')->get();
 
+        // dd($data);
         $nopol = Data::get();
 
         // dd($data);
@@ -38,21 +39,29 @@ class EntryController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        // dd($request->user()->id);
         //dd($request);
-        $data = new Entry();
-        $data->data_id = $request->data_id;
-        $data->no_telp = $request->no_telp;
-        $data->status = $request->status;
-        $data->notes = $request->notes;
-        //dd($hewan->nama_hewan);
-        $saveData = $data->save();
+        $validasi = Entry::where('data_id', $request->data_id)->first();
 
-        //dd($saveHewan);
-        if ($saveData == true) {
-            return redirect()->route('entry.index')->with('success', 'Data Petugas berhasil ditambah!');
+        // dd($validasi);
+        if($validasi){
+            return redirect()->route('entry.index')->with('success', 'Data Sudah Di Entry');
         }else{
-            return redirect()->route('entry.index')->with('validationErrors', 'Coba Dicek Lagi Cuy');
+            $data = new Entry();
+            $data->users_id = $request->user()->id;
+            $data->data_id = $request->data_id;
+            $data->no_telp = $request->no_telp;
+            $data->status = $request->status;
+            $data->notes = $request->notes;
+            //dd($hewan->nama_hewan);
+            $saveData = $data->save();
+        
+            //dd($saveHewan);
+            if ($saveData == true) {
+                return redirect()->route('entry.index')->with('success', 'Data Petugas berhasil ditambah!');
+            }else{
+                return redirect()->route('entry.index')->with('validationErrors', 'Coba Dicek Lagi Cuy');
+            }
         }
     }
 
@@ -83,8 +92,17 @@ class EntryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Entry $entry)
+    public function destroy(string $id)
     {
-        //
+        $data = Entry::find($id);
+        $deleteData = $data->delete();
+        //dd($deleteData);
+
+
+        if ($deleteData == true) {
+            return redirect()->route('entry.index')->with('success', 'Data kendaraan berhasil dihapus');
+        } else {
+            return redirect()->route('entry.index')->with('ValidationErrors','Data Gak Bisa Diapain');
+        }
     }
 }

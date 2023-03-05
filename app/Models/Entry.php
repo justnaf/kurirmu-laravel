@@ -9,10 +9,14 @@ class Entry extends Model
 {
     protected $table = 'entry';
     protected $primarykey = "id";
-    protected $fillable = [ 'data_id','no_telp','status','notes'];
+    protected $fillable = [ 'user_id','data_id','no_telp','status','notes'];
 
     public function data()
     {
         return $this->belongsTo(Data::class);
+    }
+    public function users()
+    {
+        return $this->belongsTo(User::class);
     }
 }

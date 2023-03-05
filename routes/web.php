@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\DashController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\ProfileController;
@@ -39,7 +40,7 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function(){
      Route::resource('pengguna', PenggunaController::class);
      Route::resource('data', DataController::class);
      Route::resource('entry', EntryController::class);
-     Route::get('/dashboard', function () {return view('dashboard.admin');});
+     Route::get('/dashboard', [DashController::class,'index'])->name('admindash');
 });
 
 
